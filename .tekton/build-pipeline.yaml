@@ -379,15 +379,10 @@ spec:
             - "true"
     - name: deprecated-base-image-check
       params:
-        # TODO: This task does not yet support Image Indexes. Since all arches are built from the same
-        # source (and Containerfile), we only need to run this check against one of the arches.
-        # https://issues.redhat.com/browse/KFLUXBUGS-1316
-        - name: BASE_IMAGES_DIGESTS
-          value: $(tasks.build-container-amd64.results.BASE_IMAGES_DIGESTS)
         - name: IMAGE_URL
-          value: $(tasks.build-container-amd64.results.IMAGE_URL)
+          value: $(tasks.build-container.results.IMAGE_URL)
         - name: IMAGE_DIGEST
-          value: $(tasks.build-container-amd64.results.IMAGE_DIGEST)
+          value: $(tasks.build-container.results.IMAGE_DIGEST)
       runAfter:
         - build-container
       taskRef:
